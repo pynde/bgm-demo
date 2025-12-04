@@ -4,7 +4,7 @@ import { CenterPanel } from "./components/CenterPanel";
 import { RightPanel } from "./components/RightPanel";
 import { useTheme } from "./contexts/ThemeContext";
 import clsx from "clsx";
-import { Activity } from "react";
+import { Activity, Suspense } from "react";
 
 import { BackgroundAnimation } from "./components/BackgroundAnimation";
 
@@ -16,20 +16,18 @@ export default function App() {
       {/* <img src={getBackgroundImage("bgimage")} key={getBackgroundImage("bgimage")} className={clsx(`animate-fade ease-in-out animate-duration-1000 animate-delay-100 blur-xs absolute top-0 left-0 w-full h-full object-cover mix-blend-color-burn`)} /> */}
       <BackgroundAnimation />
       {/* Main Content */}
-      <div className="transition-all duration-700 pt-2 ease-in-out h-screen max-h-screen px-6 flex gap-6 relative overflow-hidden">
-        {/* Left Panel - Player Info */}
-        <Activity mode={theme.selectedTheme ? "visible" : "hidden"}>
+      <Suspense fallback={<div>Loading...</div>}>
+        <div className="transition-all duration-700 pt-2 ease-in-out h-screen max-h-screen px-6 flex gap-6 relative overflow-hidden">
+          {/* Left Panel - Player Info */}
           <LeftPanel />
-        </Activity>
-        {/* Center Area - Game Board */}
-        <div className="flex flex-col justify-start items-center flex-1">
-          <CenterPanel />
-        </div>
-        {/* Right Panel - Gauge/Indicator */}
-        <Activity mode={theme.selectedTheme ? "visible" : "hidden"}>
+          {/* Center Area - Game Board */}
+          <div className="flex flex-col justify-start items-center flex-1">
+            <CenterPanel />
+          </div>
+          {/* Right Panel - Gauge/Indicator */}
           <RightPanel />
-        </Activity>
-      </div>
+        </div>
+      </Suspense>
     </div>
   );
 }
