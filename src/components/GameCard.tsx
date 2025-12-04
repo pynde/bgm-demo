@@ -99,6 +99,7 @@ export function GameCard({ card, onClick, onMouseEnter, onMouseLeave, isSelected
                   src={card.imageUrl}
                   alt={card.title}
                   className="w-full h-full object-cover"
+                  key={card.id + ''}
                 />
               ) : (
                 <Icon className="w-12 h-12 text-slate-600" />
