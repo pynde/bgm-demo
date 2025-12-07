@@ -27,7 +27,7 @@ function MovingCloud({ position, speed, ...props }: any) {
     )
 }
 
-export function BirdAnimation() {
+export default function BirdAnimation() {
     return (
         <>
             <ambientLight intensity={1.5} />

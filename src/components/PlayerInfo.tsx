@@ -25,9 +25,10 @@ import { useTheme } from "../contexts/ThemeContext";
 import { FC } from "react";
 import type { HTMLAttributes } from "react";
 import clsx from "clsx";
+import { ImageWithFallback } from "./figma/ImageWithFallback";
 
 
-export type PlayerInfoProps = HTMLAttributes<HTMLDivElement>;
+export type PlayerInfoProps = HTMLAttributes<HTMLDivElement> & { bgImgSrc: string };
 
 
 export const PlayerInfo: FC<PlayerInfoProps> = (props: PlayerInfoProps) => {
@@ -229,48 +230,49 @@ export const PlayerInfo: FC<PlayerInfoProps> = (props: PlayerInfoProps) => {
   return (
     <Card
       {...props}
-      className={clsx(`min-h-[200px] justify-center px-4 gap-2 transition-all duration-500 ${getCardBackground()}`, props.className)}
+      className={clsx(`min-h-[200px] rounded-md overflow-hidden relative justify-center px-4 gap-2 transition-all duration-500 ${getCardBackground()}`, props.className)}
     >
-      <CardHeader className="pb-0 mb-0">
-      {/* Player Header */}
-      <div className="flex items-center gap-1">
-        <Avatar className="w-8 h-8">
-        <AvatarFallback
-          className={`bg-linear-to-br ${getAvatarGradient()}`}
-        >
-          <AvatarIcon className="w-8 h-8 p-1 text-white mix-blend-difference" />
-        </AvatarFallback>
-        </Avatar>
-        <div>
-        <h2 className="text-white font-bold mix-blend-screen text-md">
-          Player Name
-        </h2>
-        {/* <p className="text-slate-400">{getPlayerClass()}</p> */}
-        </div>
-      </div>
-      </CardHeader>
-
-      <Separator className="bg-slate-700 my-1" />
-
-      <CardContent className="pt-0">
-      {/* Resources */}
-      <div className="grid grid-cols-3 gap-4 items-center">
-        {resources.map((resource) => {
-        const Icon = resource.icon;
-        return (
-          <div
-          key={resource.label}
-          className="flex items-center gap-2 justify-center"
-          >
-          <Icon className={`w-5 h-5 ${resource.color}`} />
-          <span className="text-white">
-            {resource.value}
-          </span>
+      <ImageWithFallback className='w-full h-full absolute inset-0 object-cover mix-blend-color-burn transition-opacity duration-500' src={props.bgImgSrc} />
+      <div className="relative">
+        <CardHeader className="pb-0 mb-0">
+          {/* Player Header */}
+          <div className="flex items-center gap-1">
+            <Avatar className="w-8 h-8">
+              <AvatarFallback
+                className={`bg-linear-to-br ${getAvatarGradient()}`}
+              >
+                <AvatarIcon className="w-8 h-8 p-1 text-white mix-blend-difference" />
+              </AvatarFallback>
+            </Avatar>
+            <div>
+              <h2 className="text-white font-bold mix-blend-screen text-md">
+                Player Name
+              </h2>
+              {/* <p className="text-slate-400">{getPlayerClass()}</p> */}
+            </div>
           </div>
-        );
-        })}
+        </CardHeader>
+        <Separator className="bg-slate-700 my-1" />
+        <CardContent className="pt-0">
+          {/* Resources */}
+          <div className="grid grid-cols-3 gap-4 items-center">
+            {resources.map((resource) => {
+              const Icon = resource.icon;
+              return (
+                <div
+                  key={resource.label}
+                  className="flex items-center gap-2 justify-center"
+                >
+                  <Icon className={`w-5 h-5 ${resource.color}`} />
+                  <span className="text-white">
+                    {resource.value}
+                  </span>
+                </div>
+              );
+            })}
+          </div>
+        </CardContent>
       </div>
-      </CardContent>
     </Card>
   );
 }

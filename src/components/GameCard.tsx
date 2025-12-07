@@ -93,12 +93,12 @@ export function GameCard({ card, onClick, onMouseEnter, onMouseLeave, isSelected
             </div>
 
             {/* Card Art */}
-            <div className="flex-1 bg-slate-800 rounded-lg mb-2 flex items-center justify-center overflow-hidden">
+            <div className="flex-1 bg-yellow-800 relative rounded-lg mb-2 flex items-center justify-center overflow-hidden">
               {card.imageUrl ? (
                 <ImageWithFallback
                   src={card.imageUrl}
                   alt={card.title}
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-cover transition-opacity duration-500"
                   key={card.id + ''}
                 />
               ) : (

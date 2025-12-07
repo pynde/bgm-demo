@@ -1,5 +1,6 @@
 import clsx from 'clsx';
-import React, { Suspense, useEffect, useRef, useState } from 'react'
+import { LoaderCircle } from 'lucide-react';
+import React, { Activity, useEffect, useRef, useState } from 'react'
 
 const ERROR_IMG_SRC =
   'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iODgiIGhlaWdodD0iODgiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgc3Ryb2tlPSIjMDAwIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBvcGFjaXR5PSIuMyIgZmlsbD0ibm9uZSIgc3Ryb2tlLXdpZHRoPSIzLjciPjxyZWN0IHg9IjE2IiB5PSIxNiIgd2lkdGg9IjU2IiBoZWlnaHQ9IjU2IiByeD0iNiIvPjxwYXRoIGQ9Im0xNiA1OCAxNi0xOCAzMiAzMiIvPjxjaXJjbGUgY3g9IjUzIiBjeT0iMzUiIHI9IjciLz48L3N2Zz4KCg=='
@@ -14,13 +15,15 @@ export function ImageWithFallback(props: React.ImgHTMLAttributes<HTMLImageElemen
   }
 
   useEffect(() => {
-    if (imgRef.current?.complete) {
-      setLoading(false)
+    const img = imgRef.current;
+    if (img && img.complete) {
+      requestAnimationFrame(() => setLoading(false));
     }
-    console.log(imgRef.current, 'complete: ' + imgRef.current?.complete);
-  }, [imgRef.current]);
+  }, []);
 
-
+  const handleLoad = () => {
+    requestAnimationFrame(() => setLoading(false));
+  }
 
   const { src, alt, style, className, ...rest } = props
   if (!src) return null;
@@ -34,14 +37,20 @@ export function ImageWithFallback(props: React.ImgHTMLAttributes<HTMLImageElemen
       </div>
     </div>
   ) : (
-    <div className={clsx(loading && 'animate-pulse animate-infinite bg-slate-500/80', 'w-full h-full')}>
-      <img loading="lazy" onLoad={() => setLoading(false)} ref={imgRef} src={src} alt={alt} className={className} style={style} {...rest} onError={handleError} />
-    </div>
+    <>
+      <img loading="lazy" onLoad={() => handleLoad()} ref={imgRef} src={src} alt={alt} onError={handleError} className={clsx(className, loading ? "opacity-0" : "opacity-100")} style={style} {...rest} />
+      <LoadingImageAnimation loading={loading} />
+    </>
   )
 }
 
-const LoadingImage = () => {
+export const LoadingImageAnimation = (props: React.HTMLAttributes<HTMLDivElement> & { loading: boolean }) => {
+
   return (
-    <div className="flex items-center justify-center w-full h-full animate-pulse animate-infinite" />
+    <Activity mode={props.loading ? "visible" : "hidden"}>
+      <div className={clsx("w-full h-full absolute inset-0 flex items-center justify-center")}>
+        <LoaderCircle className={'animate-spin animate-infinite'} />
+      </div>
+    </Activity>
   )
 }

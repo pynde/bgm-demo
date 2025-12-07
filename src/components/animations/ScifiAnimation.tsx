@@ -74,7 +74,7 @@ function Star({ position }: { position: [number, number, number] }) {
     )
 }
 
-export function ScifiAnimation() {
+export default function ScifiAnimation() {
     const planets: PlanetProps[] = useMemo(() => {
         return [
             // One large dominant planet in the center background

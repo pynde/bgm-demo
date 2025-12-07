@@ -12,7 +12,6 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as WhatRouteImport } from './routes/what'
 import { Route as CenterAbsoluteRouteImport } from './routes/_centerAbsolute'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as TestiIndexRouteImport } from './routes/testi.index'
 import { Route as CenterAbsoluteWhyRouteImport } from './routes/_centerAbsolute.why'
 import { Route as CenterAbsoluteHowRouteImport } from './routes/_centerAbsolute.how'
 
@@ -28,11 +27,6 @@ const CenterAbsoluteRoute = CenterAbsoluteRouteImport.update({
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const TestiIndexRoute = TestiIndexRouteImport.update({
-  id: '/testi/',
-  path: '/testi/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CenterAbsoluteWhyRoute = CenterAbsoluteWhyRouteImport.update({
@@ -51,14 +45,12 @@ export interface FileRoutesByFullPath {
   '/what': typeof WhatRoute
   '/how': typeof CenterAbsoluteHowRoute
   '/why': typeof CenterAbsoluteWhyRoute
-  '/testi': typeof TestiIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/what': typeof WhatRoute
   '/how': typeof CenterAbsoluteHowRoute
   '/why': typeof CenterAbsoluteWhyRoute
-  '/testi': typeof TestiIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -67,13 +59,12 @@ export interface FileRoutesById {
   '/what': typeof WhatRoute
   '/_centerAbsolute/how': typeof CenterAbsoluteHowRoute
   '/_centerAbsolute/why': typeof CenterAbsoluteWhyRoute
-  '/testi/': typeof TestiIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/what' | '/how' | '/why' | '/testi'
+  fullPaths: '/' | '/what' | '/how' | '/why'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/what' | '/how' | '/why' | '/testi'
+  to: '/' | '/what' | '/how' | '/why'
   id:
     | '__root__'
     | '/'
@@ -81,14 +72,12 @@ export interface FileRouteTypes {
     | '/what'
     | '/_centerAbsolute/how'
     | '/_centerAbsolute/why'
-    | '/testi/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   CenterAbsoluteRoute: typeof CenterAbsoluteRouteWithChildren
   WhatRoute: typeof WhatRoute
-  TestiIndexRoute: typeof TestiIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -112,13 +101,6 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/testi/': {
-      id: '/testi/'
-      path: '/testi'
-      fullPath: '/testi'
-      preLoaderRoute: typeof TestiIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/_centerAbsolute/why': {
@@ -156,7 +138,6 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   CenterAbsoluteRoute: CenterAbsoluteRouteWithChildren,
   WhatRoute: WhatRoute,
-  TestiIndexRoute: TestiIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

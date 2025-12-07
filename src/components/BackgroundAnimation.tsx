@@ -1,11 +1,15 @@
+"use client"
+
 import { Canvas } from '@react-three/fiber'
 import { useTheme } from '../contexts/ThemeContext'
-import { ScifiAnimation } from './animations/ScifiAnimation'
-import { WarAnimation } from './animations/WarAnimation'
-import { BirdAnimation } from './animations/BirdAnimation'
+import React from 'react'
+
+const ScifiAnimation = React.lazy(() => import('./animations/ScifiAnimation'))
+const WarAnimation = React.lazy(() => import('./animations/WarAnimation'))
+const BirdAnimation = React.lazy(() => import('./animations/BirdAnimation'))
 import { Suspense } from 'react'
 
-export function BackgroundAnimation() {
+export default function BackgroundAnimation() {
     const { selectedTheme } = useTheme()
 
     if (!selectedTheme) return null

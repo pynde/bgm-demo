@@ -3,7 +3,7 @@ import { useFrame } from '@react-three/fiber'
 import { Points, PointMaterial } from '@react-three/drei'
 import * as THREE from 'three'
 
-export function WarAnimation() {
+export default function WarAnimation() {
     const count = 200
     const positions = useMemo(() => {
         const pos = new Float32Array(count * 3)
