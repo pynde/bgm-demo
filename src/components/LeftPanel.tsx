@@ -12,19 +12,19 @@ export function LeftPanel() {
   const getPlayerImages = (): PlayerImage[] => {
     switch (selectedTheme) {
       case 'bird': return [
-        { url: '/gpt_lintu_player_1.png', bgSize: 'cover', bgPosition: 'center top -4rem', bgRepeat: 'bg-no-repeat' },
-        { url: '/gpt_lintu_player_2.png', bgSize: 'cover', bgPosition: 'center top -4rem', bgRepeat: 'bg-no-repeat' },
-        { url: '/gpt_lintu_player_3.png', bgSize: 'cover', bgPosition: 'center top -4rem', bgRepeat: 'bg-no-repeat' }
+        { url: '/gpt_lintu_player_1_resized_512x768.webp', bgSize: 'cover', bgPosition: 'center top -4rem', bgRepeat: 'bg-no-repeat' },
+        { url: '/gpt_lintu_player_2_resized_512x768.webp', bgSize: 'cover', bgPosition: 'center top -4rem', bgRepeat: 'bg-no-repeat' },
+        { url: '/gpt_lintu_player_3_resized_512x768.webp', bgSize: 'cover', bgPosition: 'center top -4rem', bgRepeat: 'bg-no-repeat' }
       ];
       case 'war': return [
-        { url: '/canva_sota_player_1.png', bgSize: 'cover', bgPosition: 'center top 10%', bgRepeat: 'bg-no-repeat' },
-        { url: '/canva_sota_player_2.png', bgSize: 'cover', bgPosition: 'center top 10%', bgRepeat: 'bg-no-repeat' },
-        { url: '/canva_sota_player_3.png', bgSize: 'cover', bgPosition: 'center top 10%', bgRepeat: 'bg-no-repeat' }
+        { url: '/canva_sota_player_1_resized_540x540.webp', bgSize: 'cover', bgPosition: 'center top 10%', bgRepeat: 'bg-no-repeat' },
+        { url: '/canva_sota_player_2_resized_540x540.webp', bgSize: 'cover', bgPosition: 'center top 10%', bgRepeat: 'bg-no-repeat' },
+        { url: '/canva_sota_player_3_resized_540x540.webp', bgSize: 'cover', bgPosition: 'center top 10%', bgRepeat: 'bg-no-repeat' }
       ]
       case 'scifi': return [
-        { url: '/canva_scifi_player_1.png', bgSize: 'cover', bgPosition: 'center top 20%', bgRepeat: 'bg-no-repeat' },
-        { url: '/canva_scifi_player_2.png', bgSize: 'cover', bgPosition: 'center top 20%', bgRepeat: 'bg-no-repeat' },
-        { url: '/canva_scifi_player_3.png', bgSize: 'cover', bgPosition: 'center top 20%', bgRepeat: 'bg-no-repeat' }
+        { url: '/canva_scifi_player_1_resized_540x540.webp', bgSize: 'cover', bgPosition: 'center top 20%', bgRepeat: 'bg-no-repeat' },
+        { url: '/canva_scifi_player_2_resized_540x540.webp', bgSize: 'cover', bgPosition: 'center top 20%', bgRepeat: 'bg-no-repeat' },
+        { url: '/canva_scifi_player_3_resized_540x540.webp', bgSize: 'cover', bgPosition: 'center top 20%', bgRepeat: 'bg-no-repeat' }
       ]
       default: return [];
     }
