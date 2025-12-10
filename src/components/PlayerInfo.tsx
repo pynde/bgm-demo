@@ -23,12 +23,12 @@ import { Avatar, AvatarFallback } from "./ui/avatar";
 import { Separator } from "./ui/separator";
 import { useTheme } from "../contexts/ThemeContext";
 import { FC } from "react";
-import type { HTMLAttributes } from "react";
+import type { HTMLAttributes, ReactElement } from "react";
 import clsx from "clsx";
 import { ImageWithFallback } from "./figma/ImageWithFallback";
 
 
-export type PlayerInfoProps = HTMLAttributes<HTMLDivElement> & { bgImgSrc: string };
+export type PlayerInfoProps = HTMLAttributes<HTMLDivElement> & { bgImage: ReactElement<typeof ImageWithFallback> };
 
 
 export const PlayerInfo: FC<PlayerInfoProps> = (props: PlayerInfoProps) => {
@@ -232,7 +232,7 @@ export const PlayerInfo: FC<PlayerInfoProps> = (props: PlayerInfoProps) => {
       {...props}
       className={clsx(`min-h-[200px] rounded-md overflow-hidden relative justify-center px-4 gap-2 transition-all duration-500 ${getCardBackground()}`, props.className)}
     >
-      <ImageWithFallback className='w-full h-full absolute inset-0 object-cover mix-blend-color-burn transition-opacity duration-500' src={props.bgImgSrc} />
+      {props.bgImage}
       <div className="relative">
         <CardHeader className="pb-0 mb-0">
           {/* Player Header */}

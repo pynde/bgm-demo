@@ -3,28 +3,27 @@ import { useTheme } from '../contexts/ThemeContext';
 import clsx from 'clsx';
 import { ImageWithFallback } from './figma/ImageWithFallback';
 
-type PlayerImage = { url: string, bgSize: string, bgPosition: string, bgRepeat: string }
 
 export function LeftPanel() {
   const { getBackgroundImage, selectedTheme } = useTheme();
   const bgImage = getBackgroundImage('left');
 
-  const getPlayerImages = (): PlayerImage[] => {
+  const getPlayerImages = (): React.ImgHTMLAttributes<HTMLImageElement>[] => {
     switch (selectedTheme) {
       case 'bird': return [
-        { url: '/gpt_lintu_player_1_resized_512x768.webp', bgSize: 'cover', bgPosition: 'center top -4rem', bgRepeat: 'bg-no-repeat' },
-        { url: '/gpt_lintu_player_2_resized_512x768.webp', bgSize: 'cover', bgPosition: 'center top -4rem', bgRepeat: 'bg-no-repeat' },
-        { url: '/gpt_lintu_player_3_resized_512x768.webp', bgSize: 'cover', bgPosition: 'center top -4rem', bgRepeat: 'bg-no-repeat' }
+        { src: '/gpt_lintu_player_1_resized_512x768.webp', className: 'object-[50%_-3rem]' },
+        { src: '/gpt_lintu_player_2_resized_512x768.webp', className: 'object-[50%_-3rem]' },
+        { src: '/gpt_lintu_player_3_resized_512x768.webp', className: 'object-[50%_-3rem]' }
       ];
       case 'war': return [
-        { url: '/canva_sota_player_1_resized_540x540.webp', bgSize: 'cover', bgPosition: 'center top 10%', bgRepeat: 'bg-no-repeat' },
-        { url: '/canva_sota_player_2_resized_540x540.webp', bgSize: 'cover', bgPosition: 'center top 10%', bgRepeat: 'bg-no-repeat' },
-        { url: '/canva_sota_player_3_resized_540x540.webp', bgSize: 'cover', bgPosition: 'center top 10%', bgRepeat: 'bg-no-repeat' }
+        { src: '/canva_sota_player_1_resized_540x540.webp', className: 'object-[50%_10%]' },
+        { src: '/canva_sota_player_2_resized_540x540.webp', className: 'object-[50%_10%]' },
+        { src: '/canva_sota_player_3_resized_540x540.webp', className: 'object-[50%_10%]' }
       ]
       case 'scifi': return [
-        { url: '/canva_scifi_player_1_resized_540x540.webp', bgSize: 'cover', bgPosition: 'center top 20%', bgRepeat: 'bg-no-repeat' },
-        { url: '/canva_scifi_player_2_resized_540x540.webp', bgSize: 'cover', bgPosition: 'center top 20%', bgRepeat: 'bg-no-repeat' },
-        { url: '/canva_scifi_player_3_resized_540x540.webp', bgSize: 'cover', bgPosition: 'center top 20%', bgRepeat: 'bg-no-repeat' }
+        { src: '/canva_scifi_player_1_resized_540x540.webp', className: 'object-[50%_20%]' },
+        { src: '/canva_scifi_player_2_resized_540x540.webp', className: 'object-[50%_20%]' },
+        { src: '/canva_scifi_player_3_resized_540x540.webp', className: 'object-[50%_20%]' }
       ]
       default: return [];
     }
@@ -39,7 +38,14 @@ export function LeftPanel() {
       }
     >
       {getPlayerImages().map(item =>
-        <PlayerInfo key={item.url} bgImgSrc={item.url} />
+        <PlayerInfo
+          bgImage={
+            <ImageWithFallback
+              className={clsx('w-full h-full absolute inset-0 object-cover mix-blend-color-burn transition-opacity duration-500', item.className)}
+              src={item.src}
+            />
+          }
+        />
       )}
     </div>
   );

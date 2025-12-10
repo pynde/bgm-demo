@@ -9,7 +9,7 @@ import { motion } from 'motion/react';
 import { Outlet } from '@tanstack/react-router';
 
 export function CenterPanel() {
-  const { getBackgroundImage, getBackgroundColor, selectedTheme } = useTheme();
+  const { getBackgroundImage } = useTheme();
   const bgImage = getBackgroundImage('center');
 
   // Use themed background if available, otherwise use default
